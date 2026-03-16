@@ -89,8 +89,8 @@ spec:
         annotations:
           gatus.home-operations.com/enabled: "false"
         hostnames:
-          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
-          - "status.${SECRET_DOMAIN}"
+          - "{{ .Release.Name }}.devtom.ch"
+          - "status.devtom.ch"
         parentRefs:
           - name: envoy-external
             namespace: network

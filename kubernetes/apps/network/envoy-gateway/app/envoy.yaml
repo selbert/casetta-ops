@@ -46,12 +46,12 @@ kind: Gateway
 metadata:
   name: envoy-external
   annotations:
-    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    external-dns.alpha.kubernetes.io/target: "external.devtom.ch"
 spec:
   gatewayClassName: envoy
   infrastructure:
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: "external.${SECRET_DOMAIN}"
+      external-dns.alpha.kubernetes.io/hostname: "external.devtom.ch"
       lbipam.cilium.io/ips: "192.168.4.8"
   listeners:
     - name: http
@@ -76,12 +76,12 @@ kind: Gateway
 metadata:
   name: envoy-internal
   annotations:
-    external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+    external-dns.alpha.kubernetes.io/target: "internal.devtom.ch"
 spec:
   gatewayClassName: envoy
   infrastructure:
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN}"
+      external-dns.alpha.kubernetes.io/hostname: "internal.devtom.ch"
       lbipam.cilium.io/ips: "192.168.4.9"
   listeners:
     - name: http

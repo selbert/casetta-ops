@@ -47,7 +47,7 @@ spec:
     route:
       dashboard:
         host:
-          name: "rook.${SECRET_DOMAIN}"
+          name: "rook.devtom.ch"
           path: /
           pathType: PathPrefix
         parentRefs:

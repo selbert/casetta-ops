@@ -10,4 +10,4 @@ spec:
       targets: ["bac59649-6cc6-474e-b8b6-55b246c60c75.cfargotunnel.com"]
     - dnsName: "external.k4s.ch"
       recordType: CNAME
-      targets: ["bd7edf12-5bf5-4689-9a5c-f1b8ea32efe0.cfargotunnel.com"]
+      targets: ["bac59649-6cc6-474e-b8b6-55b246c60c75.cfargotunnel.com"]

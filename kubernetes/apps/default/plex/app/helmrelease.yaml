@@ -108,7 +108,7 @@ spec:
       media:
         type: nfs
         server: 192.168.4.21
-        path: /storage/Media
+        path: /storage/media
         globalMounts:
           - path: /media
             readOnly: true

@@ -74,6 +74,11 @@ spec:
                   http2Origin: true
                   originServerName: "external.devtom.ch"
                 service: https://envoy-external-devtom.{{ .Release.Namespace }}.svc.cluster.local:443
+              - hostname: "*.k4s.ch"
+                originRequest:
+                  http2Origin: true
+                  originServerName: "external.k4s.ch"
+                service: https://envoy-external-k4s.{{ .Release.Namespace }}.svc.cluster.local:443
               - service: http_status:404
     persistence:
       config-file:

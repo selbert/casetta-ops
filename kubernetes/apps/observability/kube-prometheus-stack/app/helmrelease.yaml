@@ -22,7 +22,7 @@ spec:
           hostnames:
             - "alertmanager.devtom.ch"
           parentRefs:
-            - name: envoy-internal-devtom
+            - name: envoy-internal
               namespace: network
       alertmanagerSpec:
         alertmanagerConfiguration:
@@ -48,7 +48,7 @@ spec:
           hostnames:
             - "prometheus.devtom.ch"
           parentRefs:
-            - name: envoy-internal-devtom
+            - name: envoy-internal
               namespace: network
       prometheusSpec:
         externalUrl: "https://prometheus.devtom.ch"

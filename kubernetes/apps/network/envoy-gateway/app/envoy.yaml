@@ -44,74 +44,14 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: envoy-external-k4s
+  name: envoy-external
   annotations:
-    external-dns.alpha.kubernetes.io/target: "external.k4s.ch"
+    external-dns.alpha.kubernetes.io/target: "external.devtom.ch,external.k4s.ch"
 spec:
   gatewayClassName: envoy
   infrastructure:
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: "external.k4s.ch"
-      lbipam.cilium.io/ips: "192.168.4.6"
-  listeners:
-    - name: http
-      protocol: HTTP
-      port: 80
-      allowedRoutes:
-        namespaces:
-          from: Same
-    - name: https
-      protocol: HTTPS
-      port: 443
-      allowedRoutes:
-        namespaces:
-          from: All
-      tls:
-        certificateRefs:
-          - kind: Secret
-            name: k4s-ch-production-tls
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
-metadata:
-  name: envoy-internal-k4s
-  annotations:
-    external-dns.alpha.kubernetes.io/target: "internal.k4s.ch"
-spec:
-  gatewayClassName: envoy
-  infrastructure:
-    annotations:
-      external-dns.alpha.kubernetes.io/hostname: "internal.k4s.ch"
-      lbipam.cilium.io/ips: "192.168.4.7"
-  listeners:
-    - name: http
-      protocol: HTTP
-      port: 80
-      allowedRoutes:
-        namespaces:
-          from: Same
-    - name: https
-      protocol: HTTPS
-      port: 443
-      allowedRoutes:
-        namespaces:
-          from: All
-      tls:
-        certificateRefs:
-          - kind: Secret
-            name: k4s-ch-production-tls
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
-metadata:
-  name: envoy-external-devtom
-  annotations:
-    external-dns.alpha.kubernetes.io/target: "external.devtom.ch"
-spec:
-  gatewayClassName: envoy
-  infrastructure:
-    annotations:
-      external-dns.alpha.kubernetes.io/hostname: "external.devtom.ch"
+      external-dns.alpha.kubernetes.io/hostname: "external.devtom.ch,external.k4s.ch"
       lbipam.cilium.io/ips: "192.168.4.8"
   listeners:
     - name: http
@@ -129,19 +69,19 @@ spec:
       tls:
         certificateRefs:
           - kind: Secret
-            name: devtom-ch-production-tls
+            name: casetta-production-tls
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: envoy-internal-devtom
+  name: envoy-internal
   annotations:
-    external-dns.alpha.kubernetes.io/target: "internal.devtom.ch"
+    external-dns.alpha.kubernetes.io/target: "internal.devtom.ch,internal.k4s.ch"
 spec:
   gatewayClassName: envoy
   infrastructure:
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: "internal.devtom.ch"
+      external-dns.alpha.kubernetes.io/hostname: "internal.devtom.ch,internal.k4s.ch"
       lbipam.cilium.io/ips: "192.168.4.9"
   listeners:
     - name: http
@@ -159,7 +99,7 @@ spec:
       tls:
         certificateRefs:
           - kind: Secret
-            name: devtom-ch-production-tls
+            name: casetta-production-tls
 ---
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: BackendTrafficPolicy
@@ -216,16 +156,10 @@ metadata:
     external-dns.alpha.kubernetes.io/controller: none
 spec:
   parentRefs:
-    - name: envoy-external-devtom
+    - name: envoy-external
       namespace: network
       sectionName: http
-    - name: envoy-internal-devtom
-      namespace: network
-      sectionName: http
-    - name: envoy-external-k4s
-      namespace: network
-      sectionName: http
-    - name: envoy-internal-k4s
+    - name: envoy-internal
       namespace: network
       sectionName: http
   rules:

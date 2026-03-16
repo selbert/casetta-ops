@@ -67,7 +67,7 @@ spec:
         hostnames:
           - "{{ .Release.Name }}.devtom.ch"
         parentRefs:
-          - name: envoy-internal-devtom
+          - name: envoy-internal
             namespace: network
     configMaps:
       config:

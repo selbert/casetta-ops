@@ -2,27 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "devtom-ch-production"
+  name: "casetta-production"
 spec:
   dnsNames:
     - "devtom.ch"
     - "*.devtom.ch"
-  duration: 160h
-  issuerRef:
-    name: letsencrypt-production
-    kind: ClusterIssuer
-  privateKey:
-    algorithm: ECDSA
-  secretName: "devtom-ch-production-tls"
-  usages:
-    - digital signature
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: "k4s-ch-production"
-spec:
-  dnsNames:
     - "k4s.ch"
     - "*.k4s.ch"
   duration: 160h
@@ -31,6 +15,6 @@ spec:
     kind: ClusterIssuer
   privateKey:
     algorithm: ECDSA
-  secretName: "k4s-ch-production-tls"
+  secretName: "casetta-production-tls"
   usages:
     - digital signature

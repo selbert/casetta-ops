@@ -11,7 +11,7 @@ spec:
   targets:
     staticConfig:
       static:
-        - expanse.internal
+        - 192.168.4.21
         - garage-door.internal
         - hdhomerun.internal
         - idrac.internal
@@ -43,7 +43,7 @@ spec:
   targets:
     staticConfig:
       static:
-        - expanse.internal:2049
+        - 192.168.4.21:2049
   metricRelabelings:
     - targetLabel: service
       replacement: blackbox-exporter-lan

@@ -51,7 +51,7 @@ spec:
           path: /
           pathType: PathPrefix
         parentRefs:
-          - name: envoy-internal
+          - name: envoy-internal-devtom
             namespace: network
     cephBlockPools:
       - name: ceph-blockpool

@@ -6,7 +6,7 @@ metadata:
 spec:
   hostnames: ["flux-webhook.devtom.ch"]
   parentRefs:
-    - name: envoy-external
+    - name: envoy-external-devtom
       namespace: network
       sectionName: https
   rules:

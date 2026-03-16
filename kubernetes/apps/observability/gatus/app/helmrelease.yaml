@@ -92,7 +92,7 @@ spec:
           - "{{ .Release.Name }}.devtom.ch"
           - "status.devtom.ch"
         parentRefs:
-          - name: envoy-external
+          - name: envoy-external-devtom
             namespace: network
     rbac:
       roles:

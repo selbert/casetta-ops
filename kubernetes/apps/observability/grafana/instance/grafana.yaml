@@ -63,7 +63,7 @@ spec:
       hostnames:
         - "grafana.devtom.ch"
       parentRefs:
-        - name: envoy-internal
+        - name: envoy-internal-devtom
           namespace: network
       rules:
         - backendRefs:

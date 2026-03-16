@@ -19,7 +19,7 @@ cniConfig:
 
 nodes:
   - hostname: "am6-1"
-    ipAddress: "192.168.1.11"
+    ipAddress: "192.168.4.11"
     installDisk: "/dev/nvme0n1"
     machineSpec:
       secureboot: false
@@ -30,7 +30,7 @@ nodes:
           hardwareAddr: "1c:83:41:41:14:5c"
         dhcp: false
         addresses:
-          - "192.168.1.11/24"
+          - "192.168.4.11/24"
         routes:
           - gateway: "192.168.4.1"
             network: 0.0.0.0/0
@@ -38,7 +38,7 @@ nodes:
         vip:
           ip: "192.168.4.10"
   - hostname: "am6-2"
-    ipAddress: "192.168.1.12"
+    ipAddress: "192.168.4.12"
     installDisk: "/dev/nvme0n1"
     machineSpec:
       secureboot: false
@@ -49,7 +49,7 @@ nodes:
           hardwareAddr: "1c:83:41:41:16:06"
         dhcp: false
         addresses:
-          - "192.168.1.12/24"
+          - "192.168.4.12/24"
         routes:
           - gateway: "192.168.4.1"
             network: 0.0.0.0/0
@@ -57,7 +57,7 @@ nodes:
         vip:
           ip: "192.168.4.10"
   - hostname: "n100-1"
-    ipAddress: "192.168.1.16"
+    ipAddress: "192.168.4.16"
     installDisk: "/dev/nvme0n1"
     machineSpec:
       secureboot: false
@@ -68,7 +68,7 @@ nodes:
           hardwareAddr: "e8:ff:1e:d0:43:e3"
         dhcp: false
         addresses:
-          - "192.168.1.16/24"
+          - "192.168.4.16/24"
         routes:
           - gateway: "192.168.4.1"
             network: 0.0.0.0/0
@@ -76,7 +76,7 @@ nodes:
         vip:
           ip: "192.168.4.10"
   - hostname: "n100-2"
-    ipAddress: "192.168.1.17"
+    ipAddress: "192.168.4.17"
     installDisk: "/dev/nvme0n1"
     machineSpec:
       secureboot: false
@@ -87,7 +87,7 @@ nodes:
           hardwareAddr: "e8:ff:1e:d1:98:d1"
         dhcp: false
         addresses:
-          - "192.168.1.17/24"
+          - "192.168.4.17/24"
         routes:
           - gateway: "192.168.4.1"
             network: 0.0.0.0/0
@@ -95,9 +95,11 @@ nodes:
 
 # Global patches
 patches:
+  - "@./patches/global/machine-ceph-usb.yaml"
   - "@./patches/global/machine-files.yaml"
   - "@./patches/global/machine-kubelet.yaml"
   - "@./patches/global/machine-network.yaml"
+  - "@./patches/global/machine-openebs.yaml"
   - "@./patches/global/machine-sysctls.yaml"
   - "@./patches/global/machine-time.yaml"
 
@@ -105,4 +107,5 @@ patches:
 controlPlane:
   patches:
     - "@./patches/controller/cluster.yaml"
+    - "@./patches/controller/machine-system-upgrades.yaml"
 

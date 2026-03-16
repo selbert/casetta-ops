@@ -2,6 +2,7 @@ machine:
   sysctls:
     fs.inotify.max_user_watches: "1048576"     # Watchdog
     fs.inotify.max_user_instances: "8192"      # Watchdog
+    fs.inotify.max_queued_events: "65536"
     net.core.rmem_max: "7500000"               # Cloudflared | QUIC
     net.core.wmem_max: "7500000"               # Cloudflared | QUIC
     net.ipv4.neigh.default.gc_thresh1: "4096"  # Prevent ARP cache overflows

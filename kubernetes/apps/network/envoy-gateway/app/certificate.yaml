@@ -31,6 +31,6 @@ spec:
     kind: ClusterIssuer
   privateKey:
     algorithm: ECDSA
-  secretName: "k4s-ch-roduction-tls"
+  secretName: "k4s-ch-production-tls"
   usages:
     - digital signature

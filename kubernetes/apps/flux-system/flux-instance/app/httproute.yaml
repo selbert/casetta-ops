@@ -4,6 +4,9 @@ kind: HTTPRoute
 metadata:
   name: github-webhook
 spec:
+  annotations:
+    gatus.home-operations.com/endpoint: |-
+      conditions: ["[STATUS] == 404"]
   hostnames: ["flux-webhook.devtom.ch"]
   parentRefs:
     - name: envoy-external

@@ -81,7 +81,6 @@ spec:
             backendRefs:
               - kind: Service
                 port: 8123
-                name: app
         hostnames:
           - "{{ .Release.Name }}.devtom.ch"
           - "{{ .Release.Name }}.k4s.ch"
@@ -99,7 +98,6 @@ spec:
             backendRefs:
               - kind: Service
                 port: 12321
-                name: app
         hostnames:
           - "ha-code.devtom.ch"
           - "ha-code.k4s.ch"

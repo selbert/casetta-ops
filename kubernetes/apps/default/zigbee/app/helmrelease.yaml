@@ -92,6 +92,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
+        controller: zigbee
         ports:
           http:
             port: *port

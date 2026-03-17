@@ -64,9 +64,7 @@ spec:
           http:
             appProtocol: kubernetes.io/ws
             port: 8123
-      code-server:
-        ports:
-          http:
+          http-code:
             port: 12321
             protocol: TCP
     route:
@@ -100,7 +98,7 @@ spec:
             backendRefs:
               - kind: Service
                 port: 12321
-                name: code-server
+                name: app
         hostnames:
           - "ha-code.devtom.ch"
           - "ha-code.k4s.ch"

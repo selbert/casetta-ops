@@ -95,13 +95,16 @@ spec:
         ports:
           http:
             port: *port
-      code-server:
-        ports:
-          http:
+          http-code:
             port: 12321
             protocol: TCP
     route:
       app:
+        hostnames:
+          - "{{ .Release.Name }}.devtom.ch"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
         rules:
           - matches:
               - path:
@@ -109,14 +112,14 @@ spec:
                   value: /
             backendRefs:
               - kind: Service
-                port: 8123
+                port: *port
                 name: app
+      code-server:
         hostnames:
-          - "{{ .Release.Name }}.devtom.ch"
+          - "{{ .Release.Name }}-code.devtom.ch"
         parentRefs:
           - name: envoy-internal
             namespace: network
-      code-server:
         rules:
           - matches:
               - path:
@@ -125,12 +128,7 @@ spec:
             backendRefs:
               - kind: Service
                 port: 12321
-                name: code-server
-        hostnames:
-          - "{{ .Release.Name }}-code.devtom.ch"
-        parentRefs:
-          - name: envoy-internal
-            namespace: network
+                name: app
     persistence:
       config:
         existingClaim: "{{ .Release.Name }}"

@@ -74,6 +74,15 @@ spec:
         annotations:
           gatus.home-operations.com/endpoint: |-
             conditions: ["[STATUS] == 200"]
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - kind: Service
+                port: 8123
+                name: app
         hostnames:
           - "{{ .Release.Name }}.devtom.ch"
           - "{{ .Release.Name }}.k4s.ch"
@@ -83,6 +92,15 @@ spec:
           - name: envoy-external
             namespace: network
       code-server:
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - kind: Service
+                port: 12321
+                name: code-server
         hostnames:
           - "ha-code.devtom.ch"
           - "ha-code.k4s.ch"

@@ -102,12 +102,30 @@ spec:
             protocol: TCP
     route:
       app:
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - kind: Service
+                port: 8123
+                name: app
         hostnames:
           - "{{ .Release.Name }}.devtom.ch"
         parentRefs:
           - name: envoy-internal
             namespace: network
       code-server:
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - kind: Service
+                port: 12321
+                name: code-server
         hostnames:
           - "{{ .Release.Name }}-code.devtom.ch"
         parentRefs:

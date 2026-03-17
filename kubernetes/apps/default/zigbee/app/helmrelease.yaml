@@ -23,7 +23,7 @@ spec:
               TZ: Europe/Zurich
               ZIGBEE2MQTT_DATA: /config
               ZIGBEE2MQTT_CONFIG_ADVANCED_LAST_SEEN: ISO_8601
-              ZIGBEE2MQTT_CONFIG_ADVANCED_LOG_LEVEL: info # debug
+              ZIGBEE2MQTT_CONFIG_ADVANCED_LOG_LEVEL: debug # debug
               ZIGBEE2MQTT_CONFIG_ADVANCED_LOG_OUTPUT: '["console"]'
               ZIGBEE2MQTT_CONFIG_AVAILABILITY_ACTIVE_TIMEOUT: 60
               ZIGBEE2MQTT_CONFIG_AVAILABILITY_PASSIVE_TIMEOUT: 2000
@@ -92,13 +92,11 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: zigbee
         ports:
           http:
             port: *port
           http-code:
             port: 12321
-            protocol: TCP
     route:
       app:
         hostnames:
@@ -114,7 +112,6 @@ spec:
             backendRefs:
               - kind: Service
                 port: *port
-                name: app
       code-server:
         hostnames:
           - "{{ .Release.Name }}-code.devtom.ch"
@@ -129,7 +126,6 @@ spec:
             backendRefs:
               - kind: Service
                 port: 12321
-                name: app
     persistence:
       config:
         existingClaim: "{{ .Release.Name }}"

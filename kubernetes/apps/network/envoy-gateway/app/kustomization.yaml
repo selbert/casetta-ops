@@ -6,5 +6,5 @@ resources:
   - ./grafanadashboard.yaml
   - ./envoy.yaml
   - ./helmrelease.yaml
+  - ./observability.yaml
   - ./ocirepository.yaml
-  - ./podmonitor.yaml

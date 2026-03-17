@@ -13,14 +13,14 @@ spec:
       envoyDeployment:
         replicas: 2
         container:
-          imageRepository: mirror.gcr.io/envoyproxy/envoy
+          imageRepository: mirror.gcr.io/envoyproxy/envoy:v1.37.1
           resources:
             requests:
               cpu: 100m
             limits:
               memory: 1Gi
       envoyService:
-        externalTrafficPolicy: Cluster
+        externalTrafficPolicy: Local
   shutdown:
     drainTimeout: 180s
   telemetry:
@@ -46,12 +46,16 @@ kind: Gateway
 metadata:
   name: envoy-external
   annotations:
-    external-dns.alpha.kubernetes.io/target: "external.devtom.ch,external.k4s.ch"
+    external-dns.alpha.kubernetes.io/target: &hostname "external.devtom.ch,external.k4s.ch"
+    gatus.home-operations.com/endpoint: |-
+      client:
+        dns-resolver: tcp://1.1.1.1:53
+      group: external
 spec:
   gatewayClassName: envoy
   infrastructure:
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: "external.devtom.ch,external.k4s.ch"
+      external-dns.alpha.kubernetes.io/hostname: *hostname
       lbipam.cilium.io/ips: "192.168.4.8"
   listeners:
     - name: http
@@ -76,12 +80,18 @@ kind: Gateway
 metadata:
   name: envoy-internal
   annotations:
-    external-dns.alpha.kubernetes.io/target: "internal.devtom.ch,internal.k4s.ch"
+    external-dns.alpha.kubernetes.io/target: &hostname  "internal.devtom.ch,internal.k4s.ch"
+    gatus.home-operations.com/endpoint: |-
+      group: internal
+      guarded: true
+      ui:
+        hide-hostname: true
+        hide-url: true
 spec:
   gatewayClassName: envoy
   infrastructure:
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: "internal.devtom.ch,internal.k4s.ch"
+      external-dns.alpha.kubernetes.io/hostname: *hostname
       lbipam.cilium.io/ips: "192.168.4.9"
   listeners:
     - name: http

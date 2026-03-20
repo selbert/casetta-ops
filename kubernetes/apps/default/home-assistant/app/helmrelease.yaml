@@ -60,7 +60,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       sonos:
-        externalName: "{{ .Release.Name }}-sonos"
         type: LoadBalancer
         externalTrafficPolicy: Local
         annotations:
@@ -91,7 +90,7 @@ spec:
                   value: /
             backendRefs:
               - kind: Service
-                name: "{{ .Release.Name }}"
+                name: app
                 port: 8123
         hostnames:
           - "{{ .Release.Name }}.devtom.ch"
@@ -109,7 +108,7 @@ spec:
                   value: /
             backendRefs:
               - kind: Service
-                name: "{{ .Release.Name }}"
+                name: app
                 port: 12321
         hostnames:
           - "ha-code.devtom.ch"

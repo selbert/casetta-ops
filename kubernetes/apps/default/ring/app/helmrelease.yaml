@@ -93,5 +93,5 @@ spec:
               - kind: Service
                 port: *code-port
     persistence:
-      config:
+      data:
         existingClaim: "{{ .Release.Name }}"

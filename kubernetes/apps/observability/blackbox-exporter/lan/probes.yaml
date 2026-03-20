@@ -11,7 +11,7 @@ spec:
   targets:
     staticConfig:
       static:
-        - 192.168.4.21
+        - 192.168.4.69
         - garage-door.internal
         - hdhomerun.internal
         - idrac.internal
@@ -43,7 +43,7 @@ spec:
   targets:
     staticConfig:
       static:
-        - 192.168.4.21:2049
+        - 192.168.4.69:2049
   metricRelabelings:
     - targetLabel: service
       replacement: blackbox-exporter-lan

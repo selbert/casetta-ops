@@ -94,7 +94,7 @@ spec:
             subPath: repository.config
       repository:
         type: nfs
-        server: 192.168.4.21
+        server: 192.168.4.69
         path: /storage/Kopia
         globalMounts:
           - path: /repository

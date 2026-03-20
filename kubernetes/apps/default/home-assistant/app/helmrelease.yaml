@@ -90,7 +90,7 @@ spec:
                   value: /
             backendRefs:
               - kind: Service
-                name: app
+                name: "{{ .Release.Name }}-app"
                 port: 8123
         hostnames:
           - "{{ .Release.Name }}.devtom.ch"
@@ -108,7 +108,7 @@ spec:
                   value: /
             backendRefs:
               - kind: Service
-                name: app
+                name: "{{ .Release.Name }}-app"
                 port: 12321
         hostnames:
           - "ha-code.devtom.ch"

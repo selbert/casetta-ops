@@ -60,6 +60,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       sonos:
+        externalName: "{{ .Release.Name }}-sonos"
         type: LoadBalancer
         externalTrafficPolicy: Local
         annotations:
@@ -67,9 +68,12 @@ spec:
         ports:
           tcp:
             port: 1400
+            protocol: TCP
       app:
+        primary: true
         ports:
           http:
+            primary: true
             appProtocol: kubernetes.io/ws
             port: 8123
           http-code:

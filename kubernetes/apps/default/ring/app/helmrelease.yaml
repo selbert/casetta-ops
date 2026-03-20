@@ -1,0 +1,105 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ring
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: ring
+  interval: 1h
+  values:
+    controllers:
+      ring:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: docker.io/tsightler/ring-mqtt
+              tag: 5.9.2@sha256:2f96b55bc97a72ff704eeabf48a68290f6cd0e7dbcab1bfecbb8c02b006680a5
+            env:
+              TZ: Europe/Zurich
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 10
+            securityContext:
+              allowPrivilegeEscalation: true
+              readOnlyRootFilesystem: false
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 1Gi
+          code-server:
+            image:
+              repository: ghcr.io/coder/code-server
+              tag: 4.111.0@sha256:d7a7c0188e942c53e7725dc7b7990086e1701557330f7db179fa270813544dcc
+            args: [
+              "--auth", "none",
+              "--user-data-dir", "/data/.vscode",
+              "--extensions-dir", "/data/.vscode",
+              "--port", "12321",
+              "/data"
+            ]
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        controller: ring2mqtt
+        ports:
+          video:
+            port: &port 8554
+          http-code:
+            port: &code-port 12321
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.devtom.ch"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - kind: Service
+                port: *port
+      code-server:
+        hostnames:
+          - "{{ .Release.Name }}-code.devtom.ch"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - kind: Service
+                port: *code-port
+    persistence:
+      config:
+        existingClaim: "{{ .Release.Name }}"

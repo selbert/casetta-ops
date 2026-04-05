@@ -60,7 +60,8 @@ spec:
           - port: http
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.devtom.ch","{{ .Release.Name }}.k4s.ch"]
+        hostnames:
+          - "{{ .Release.Name }}.devtom.ch"
         parentRefs:
           - name: envoy-external
             namespace: network

@@ -94,9 +94,7 @@ spec:
                 port: 8123
         hostnames:
           - "{{ .Release.Name }}.devtom.ch"
-          - "{{ .Release.Name }}.k4s.ch"
           - "ha.devtom.ch"
-          - "ha.k4s.ch"
         parentRefs:
           - name: envoy-external
             namespace: network
@@ -112,7 +110,6 @@ spec:
                 port: 12321
         hostnames:
           - "ha-code.devtom.ch"
-          - "ha-code.k4s.ch"
         parentRefs:
           - name: envoy-internal
             namespace: network

@@ -109,6 +109,7 @@ spec:
                 name: "{{ .Release.Name }}-app"
                 port: 12321
         hostnames:
+          - "{{ .Release.Name }}-code.devtom.ch"
           - "ha-code.devtom.ch"
         parentRefs:
           - name: envoy-internal

@@ -38,6 +38,8 @@ spec:
       enabled: false
     mayastor:
       enabled: true
+      preUpgradeHook:
+        enabled: false
       csi:
         node:
           kubeletDir: /var/openebs/replicated

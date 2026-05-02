@@ -37,9 +37,9 @@ spec:
     lvm-localpv:
       enabled: false
     mayastor:
-    etcd:
-      preUpgradeJob:
-        enabled: false
+      etcd:
+        preUpgradeJob:
+          enabled: false
       enabled: true
     engines:
       local:

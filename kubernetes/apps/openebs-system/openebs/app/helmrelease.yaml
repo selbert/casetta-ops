@@ -37,6 +37,10 @@ spec:
     lvm-localpv:
       enabled: false
     mayastor:
+    csi:
+      node:
+        initContainers:
+          enabled: false
       etcd:
         preUpgradeJob:
           enabled: false

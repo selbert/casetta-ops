@@ -37,6 +37,8 @@ spec:
     lvm-localpv:
       enabled: false
     mayastor:
+      io_engine:
+        envcontext: "iova-mode=pa"
       csi:
         node:
           initContainers:

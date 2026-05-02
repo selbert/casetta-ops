@@ -1,11 +1,11 @@
 machine:
   kubelet:
     extraMounts:
-      - destination: /var/openebs
+      - destination: /var/local
         type: bind
-        source: /var/openebs
+        source: /var/local
         options: ["bind", "rshared", "rw"]
   sysctls:
-    vm.nr_hugepages: "1024"
+    vm.nr_hugepages: "2048"
   nodeLabels:
     openebs.io/engine: "mayastor"

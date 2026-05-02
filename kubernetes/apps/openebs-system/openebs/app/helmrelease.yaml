@@ -37,7 +37,10 @@ spec:
     lvm-localpv:
       enabled: false
     mayastor:
-      enabled: false
+      enabled: true
+      csi:
+        node:
+          kubeletDir: /var/openebs/replicated
     engines:
       local:
         lvm:
@@ -46,7 +49,7 @@ spec:
           enabled: false
       replicated:
         mayastor:
-          enabled: false
+          enabled: true
     loki:
       enabled: false
     alloy:

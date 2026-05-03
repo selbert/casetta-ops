@@ -1,0 +1,6 @@
+apiVersion: v1alpha1
+kind: RawVolumeConfig
+name: replicated-storage
+provisioning:
+  minSize: 400GB
+  maxSize: 400GB

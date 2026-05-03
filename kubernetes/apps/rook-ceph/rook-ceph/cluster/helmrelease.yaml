@@ -35,10 +35,9 @@ spec:
           limits:
             memory: 8Gi # Required for bootstrap
       storage:
+        devicePathFilter: /dev/disk/by-partlabel/r-replicated-storage
+        useAllDevices: false
         useAllNodes: true
-        useAllDevices: true
-        config:
-          osdsPerDevice: "1"
     monitoring:
       enabled: true
       createPrometheusRules: true

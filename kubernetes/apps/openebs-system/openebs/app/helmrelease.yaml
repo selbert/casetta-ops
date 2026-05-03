@@ -11,14 +11,14 @@ spec:
   interval: 1h
   values:
     preUpgradeHook:
-      enabled: false
+      enabled: true
     localpv-provisioner:
       analytics:
         enabled: false
       localpv:
         image:
           registry: quay.io/
-        basePath: &hostPath /var/openebs/local
+        basePath: &hostPath /var/local/localpv
       hostpathClass:
         enabled: true
         name: openebs-hostpath
@@ -27,17 +27,26 @@ spec:
       helperPod:
         image:
           registry: quay.io/
-    openebs-crds:
-      csi:
-        volumeSnapshots:
-          enabled: false
-          keep: false
+    # openebs-crds:
+    #   csi:
+    #     volumeSnapshots:
+    #       enabled: false
+    #       keep: false
     zfs-localpv:
       enabled: false
     lvm-localpv:
       enabled: false
     mayastor:
-      enabled: false
+      io_engine:
+        envcontext: "iova-mode=pa"
+      csi:
+        node:
+          initContainers:
+            enabled: false
+      etcd:
+        preUpgradeJob:
+          enabled: false
+      enabled: true
     engines:
       local:
         lvm:
@@ -46,7 +55,7 @@ spec:
           enabled: false
       replicated:
         mayastor:
-          enabled: false
+          enabled: true
     loki:
       enabled: false
     alloy:

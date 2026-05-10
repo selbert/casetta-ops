@@ -16,7 +16,7 @@ resources:
   - ./deduparr/ks.yaml
   - ./echo/ks.yaml
   - ./go2rtc/ks.yaml
-  #- ./home-assistant/ks.yaml
+  - ./home-assistant/ks.yaml
   - ./mosquitto/ks.yaml
   - ./plex/ks.yaml
   - ./prowlarr/ks.yaml

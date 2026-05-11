@@ -38,6 +38,8 @@ spec:
       enabled: false
     mayastor:
       enabled: true
+      io_engine:
+        envcontext: "iova-mode=pa"
     engines:
       local:
         lvm:

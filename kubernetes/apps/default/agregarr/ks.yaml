@@ -9,7 +9,7 @@ spec:
     - ../../../../components/nfs-scaler
     - ../../../../components/volsync
   dependsOn:
-    - name: openebs
+    - name: openebs-cluster
       namespace: openebs-system
   interval: 1h
   path: ./kubernetes/apps/default/agregarr/app

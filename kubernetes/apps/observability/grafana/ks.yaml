@@ -23,7 +23,7 @@ metadata:
 spec:
   dependsOn:
     - name: grafana
-    - name: openebs
+    - name: openebs-cluster
       namespace: openebs-system
   interval: 1h
   path: ./kubernetes/apps/observability/grafana/instance

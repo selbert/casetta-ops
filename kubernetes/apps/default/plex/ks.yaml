@@ -11,7 +11,7 @@ spec:
   dependsOn:
     - name: intel-gpu-resource-driver
       namespace: kube-system
-    - name: openebs
+    - name: openebs-cluster
       namespace: openebs-system
   interval: 1h
   path: ./kubernetes/apps/default/plex/app

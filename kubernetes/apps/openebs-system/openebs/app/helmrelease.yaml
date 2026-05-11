@@ -18,7 +18,7 @@ spec:
       localpv:
         image:
           registry: quay.io/
-        basePath: &hostPath /var/openebs/local
+        basePath: &hostPath /var/local/openebs-hostpath
       hostpathClass:
         enabled: true
         name: openebs-hostpath
@@ -37,7 +37,7 @@ spec:
     lvm-localpv:
       enabled: false
     mayastor:
-      enabled: false
+      enabled: true
     engines:
       local:
         lvm:
@@ -46,7 +46,7 @@ spec:
           enabled: false
       replicated:
         mayastor:
-          enabled: false
+          enabled: true
     loki:
       enabled: false
     alloy:

@@ -27,7 +27,7 @@ nodes:
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "1c:83:41:41:14:5c"
+          hardwareAddr: "1c:83:41:41:14:5d"
         dhcp: false
         addresses:
           - "192.168.4.11/24"
@@ -46,7 +46,7 @@ nodes:
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "1c:83:41:41:16:06"
+          hardwareAddr: "1c:83:41:41:16:07"
         dhcp: false
         addresses:
           - "192.168.4.12/24"

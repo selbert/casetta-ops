@@ -1,0 +1,35 @@
+apiVersion: "openebs.io/v1beta3"
+kind: DiskPool
+metadata:
+  name: pool-on-am6-1
+  namespace: openebs
+spec:
+  node: am6-1
+  disks: ["aio:///dev/disk/by-partlabel/r-replicated-storage"]
+---
+apiVersion: "openebs.io/v1beta3"
+kind: DiskPool
+metadata:
+  name: pool-on-am6-2
+  namespace: openebs
+spec:
+  node: am6-2
+  disks: ["aio:///dev/disk/by-partlabel/r-replicated-storage"]
+---
+apiVersion: "openebs.io/v1beta3"
+kind: DiskPool
+metadata:
+  name: pool-on-n100-1
+  namespace: openebs
+spec:
+  node: n100-1
+  disks: ["aio:///dev/disk/by-partlabel/r-replicated-storage"]
+---
+apiVersion: "openebs.io/v1beta3"
+kind: DiskPool
+metadata:
+  name: pool-on-n100-2
+  namespace: openebs
+spec:
+  node: n100-2
+  disks: ["aio:///dev/disk/by-partlabel/r-replicated-storage"]

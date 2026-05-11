@@ -42,7 +42,7 @@ spec:
         statefulset:
           volumeClaimTemplates:
             - name: config
-              storageClass: ceph-block
+              storageClass: mayastor-3
               accessMode: ReadWriteOnce
               size: 5Gi
     defaultPodOptions:

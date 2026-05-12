@@ -28,5 +28,5 @@ spec:
     repository: ${APP}-volsync-secret
     sourceIdentity:
       sourceName: ${APP}
-    storageClassName: ${VOLSYNC_STORAGECLASS:=mayastor-3}
-    volumeSnapshotClassName: ${VOLSYNC_SNAPSHOTCLASS:=csi-mayastor-snapshotclass}
+    storageClassName: ${VOLSYNC_STORAGECLASS:=ceph-block}
+    volumeSnapshotClassName: ${VOLSYNC_SNAPSHOTCLASS:=csi-ceph-blockpool}

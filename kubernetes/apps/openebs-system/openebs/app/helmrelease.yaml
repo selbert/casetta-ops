@@ -37,9 +37,7 @@ spec:
     lvm-localpv:
       enabled: false
     mayastor:
-      enabled: true
-      io_engine:
-        envcontext: "iova-mode=pa"
+      enabled: false
     engines:
       local:
         lvm:
@@ -48,7 +46,7 @@ spec:
           enabled: false
       replicated:
         mayastor:
-          enabled: true
+          enabled: false
     loki:
       enabled: false
     alloy:

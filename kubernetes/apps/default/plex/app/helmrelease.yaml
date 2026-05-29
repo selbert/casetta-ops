@@ -96,9 +96,8 @@ spec:
     route:
       app:
         annotations:
-          gatus.home-operations.com/endpoint: |
-            conditions:
-              - "[STATUS] == 401"
+          gatus.home-operations.com/endpoint: |-
+            path: /identity
         hostnames:
           - "{{ .Release.Name }}.devtom.ch"
         parentRefs:

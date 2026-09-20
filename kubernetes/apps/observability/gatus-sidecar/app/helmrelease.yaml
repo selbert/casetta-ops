@@ -41,8 +41,6 @@ spec:
       items:
         - key: config.yaml
           path: config.yaml
-        - key: buddy.yaml
-          path: buddy.yaml
     persistence:
       enabled: true
       storageClass: ceph-block

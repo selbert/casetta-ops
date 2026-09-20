@@ -5,9 +5,13 @@ kind: HelmRelease
 metadata:
   name: ceph-csi-drivers
 spec:
-  chartRef:
-    kind: OCIRepository
-    name: ceph-csi-drivers
+  chart:
+    spec:
+      chart: ceph-csi-drivers
+      version: 1.0.5
+      sourceRef:
+        kind: HelmRepository
+        name: ceph-csi-operator
   interval: 1h
   values:
     # Rook-compatible values, see

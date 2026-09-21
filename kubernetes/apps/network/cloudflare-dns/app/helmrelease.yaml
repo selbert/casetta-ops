@@ -38,7 +38,6 @@ spec:
     txtOwnerId: default
     domainFilters:
       - devtom.ch
-      - k4s.ch
     serviceMonitor:
       enabled: true
     podAnnotations:

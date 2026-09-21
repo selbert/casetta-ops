@@ -51,7 +51,6 @@ spec:
     txtPrefix: k8s.main.
     domainFilters:
       - devtom.ch
-      - k4s.ch
     serviceMonitor:
       enabled: true
     podAnnotations:

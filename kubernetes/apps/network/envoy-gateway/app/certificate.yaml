@@ -7,8 +7,6 @@ spec:
   dnsNames:
     - "devtom.ch"
     - "*.devtom.ch"
-    - "k4s.ch"
-    - "*.k4s.ch"
   duration: 160h
   issuerRef:
     name: letsencrypt-production

@@ -47,7 +47,7 @@ kind: Gateway
 metadata:
   name: envoy-external
   annotations:
-    external-dns.kubernetes.io/target: &hostname "external.devtom.ch,external.k4s.ch"
+    external-dns.kubernetes.io/target: &hostname "external.devtom.ch"
     gatus.home-operations.com/endpoint: |-
       client:
         dns-resolver: tcp://1.1.1.1:53
@@ -81,7 +81,7 @@ kind: Gateway
 metadata:
   name: envoy-internal
   annotations:
-    external-dns.kubernetes.io/target: &hostname  "internal.devtom.ch,internal.k4s.ch"
+    external-dns.kubernetes.io/target: &hostname  "internal.devtom.ch"
     gatus.home-operations.com/endpoint: |-
       group: internal
       guarded: true

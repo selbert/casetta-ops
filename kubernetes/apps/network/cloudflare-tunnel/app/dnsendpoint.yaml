@@ -8,6 +8,3 @@ spec:
     - dnsName: "external.devtom.ch"
       recordType: CNAME
       targets: ["bac59649-6cc6-474e-b8b6-55b246c60c75.cfargotunnel.com"]
-    - dnsName: "external.k4s.ch"
-      recordType: CNAME
-      targets: ["bac59649-6cc6-474e-b8b6-55b246c60c75.cfargotunnel.com"]

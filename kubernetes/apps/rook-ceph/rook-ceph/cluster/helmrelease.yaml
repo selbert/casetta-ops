@@ -40,15 +40,24 @@ spec:
         mon:
           limits:
             memory: "1500Mi"
+          requests:
+            cpu: "100m"
+        osd:
+          requests:
+            cpu: "100m"
         logcollector:
           limits:
             memory: "750Mi"
         cleanup:
           limits:
             memory: "750Mi"
+          requests:
+            cpu: "100m"
         cmd-reporter:
           limits:
             memory: "750Mi"
+          requests:
+            cpu: "100m"
       security:
         cephx:
           allowedCiphers: [aes256k]

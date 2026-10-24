@@ -31,7 +31,7 @@ spec:
           resources:
             plugin:
               limits:
-                memory: 1Gi
+                memory: 750Mi
               requests:
                 cpu: 250m
                 memory: 512Mi
@@ -52,13 +52,13 @@ spec:
                 memory: 128Mi
             omapGenerator:
               limits:
-                memory: 1Gi
+                memory: 750Mi
               requests:
                 cpu: 250m
                 memory: 512Mi
             plugin:
               limits:
-                memory: 1Gi
+                memory: 750Mi
               requests:
                 memory: 512Mi
             provisioner:

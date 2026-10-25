@@ -43,6 +43,8 @@ spec:
           requests:
             cpu: "100m"
         osd:
+          limits:
+            memory: "6Gi"
           requests:
             cpu: "100m"
         logcollector:

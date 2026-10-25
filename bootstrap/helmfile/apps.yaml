@@ -41,11 +41,43 @@ releases:
       - template: default
     needs: ["kube-system/spegel"]
 
+
+  - name: external-secrets
+    namespace: external-secrets
+    inherit:
+      - template: default
+    needs: ['cert-manager/cert-manager']
+
+  - name: onepassword
+    namespace: external-secrets
+    inherit:
+      - template: default
+    hooks:
+      - # Wait for ExternalSecrets CRDs to be available
+        command: bash
+        args:
+          - -c
+          - until kubectl get crd clustersecretstores.external-secrets.io &>/dev/null; do sleep 5; done
+        events:
+          - postsync
+        showlogs: true
+      - # Apply ExternalSecret Resources
+        command: kubectl
+        args:
+          - apply
+          - --server-side
+          - --field-manager=kustomize-controller
+          - --filename=../../kubernetes/apps/external-secrets/onepassword/app/clustersecretstore.yaml
+        events:
+          - postsync
+        showlogs: true
+    needs: ['external-secrets/external-secrets']
+
   - name: flux-operator
     namespace: flux-system
     inherit:
       - template: default
-    needs: ["cert-manager/cert-manager"]
+    needs: ['cert-manager/cert-manager']
 
   - name: flux-instance
     namespace: flux-system

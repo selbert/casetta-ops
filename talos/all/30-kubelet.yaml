@@ -14,3 +14,7 @@ kind: KubeNodeConfig
 nodeIP:
   validSubnets:
     - 192.168.4.0/24
+labels:
+  node.kubernetes.io/gpu: "true"
+  topology.kubernetes.io/region: main
+---

@@ -1,0 +1,26 @@
+apiVersion: v1alpha1
+kind: RawVolumeConfig
+name: replicated-storage
+provisioning:
+  diskSelector:
+    match: "system_disk"
+  minSize: 300GB
+---
+apiVersion: v1alpha1
+kind: VolumeConfig
+name: EPHEMERAL
+provisioning:
+  diskSelector:
+    match: "system_disk"
+  minSize: 100GB
+  maxSize: 100GB
+  grow: false
+
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: local-storage
+provisioning:
+  diskSelector:
+    match: "system_disk"
+  maxSize: 100GB

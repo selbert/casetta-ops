@@ -1,0 +1,97 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ring
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: ring
+  interval: 1h
+  values:
+    controllers:
+      ring:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: docker.io/tsightler/ring-mqtt
+              tag: 5.9.3@sha256:4a4e0db460d7023aa5851ff25491401fd23b2fd153b7269af481f0953cd6f00a
+            env:
+              TZ: Europe/Zurich
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 10
+            securityContext:
+              allowPrivilegeEscalation: true
+              readOnlyRootFilesystem: false
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 1Gi
+          code-server:
+            image:
+              repository: ghcr.io/coder/code-server
+              tag: 4.143.1@sha256:377b66bec5645510ed52549bb00e648c273edc604d230a3f90fd2b2433afcb97
+            args: [
+              "--auth", "none",
+              "--user-data-dir", "/data/.vscode",
+              "--extensions-dir", "/data/.vscode",
+              "--port", "12321",
+              "/data"
+            ]
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
+    service:
+      app:
+        ports:
+          video:
+            port: &port 8554
+          http-code:
+            port: &code-port 12321
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.devtom.ch"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - kind: Service
+                port: *port
+      code-server:
+        hostnames:
+          - "{{ .Release.Name }}-code.devtom.ch"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - kind: Service
+                port: *code-port
+    persistence:
+      data:
+        existingClaim: "{{ .Release.Name }}"

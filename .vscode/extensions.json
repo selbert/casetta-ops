@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "blueglassblock.better-json5",
+    "redhat.vscode-yaml",
+    "signageos.signageos-vscode-sops",
+    "hverlin.mise-vscode"
+  ]
+}

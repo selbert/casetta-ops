@@ -1,0 +1,22 @@
+# Secrets
+*.pub
+*.key
+*.decrypted~*.yaml
+/cloudflare-tunnel.json
+/flux-webhook-token.txt
+# Template config files
+/cluster.toml
+# Kubernetes
+kubeconfig
+talosconfig
+# Python
+__pycache__/
+*.py[cod]
+# Misc.
+.claude/
+.private/
+.venv/
+.DS_Store
+Thumbs.db
+/talos/output/
+/talos/rendered/

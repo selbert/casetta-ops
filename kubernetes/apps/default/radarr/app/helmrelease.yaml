@@ -63,27 +63,6 @@ spec:
                 cpu: 100m
               limits:
                 memory: 4Gi
-          code-server:
-            image:
-              repository: ghcr.io/coder/code-server
-              tag: 4.143.1@sha256:377b66bec5645510ed52549bb00e648c273edc604d230a3f90fd2b2433afcb97
-            args:
-              [
-                "--auth",
-                "none",
-                "--user-data-dir",
-                "/config/.vscode",
-                "--extensions-dir",
-                "/config/.vscode",
-                "--port",
-                "12321",
-                "/config",
-              ]
-            resources:
-              requests:
-                cpu: 10m
-              limits:
-                memory: 512Mi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -96,8 +75,6 @@ spec:
         ports:
           http:
             port: *port
-          http-code:
-            port: &code-port 12321
     route:
       app:
         hostnames:
@@ -105,20 +82,6 @@ spec:
         parentRefs:
           - name: envoy-internal
             namespace: network
-      code-server:
-        hostnames:
-          - "{{ .Release.Name }}-code.devtom.ch"
-        parentRefs:
-          - name: envoy-internal
-            namespace: network
-        rules:
-          - matches:
-              - path:
-                  type: PathPrefix
-                  value: /
-            backendRefs:
-              - kind: Service
-                port: *code-port
     persistence:
       config:
         existingClaim: "{{ .Release.Name }}"

@@ -1,11 +1,72 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: ["github>home-operations/renovate-presets#10.0.1"],
+  extends: [
+    "github>home-operations/renovate-presets#10.0.1",
+    "github>home-operations/renovate-presets//apps/grafanaDashboards.json5#10.0.1",
+    "github>home-operations/renovate-presets//apps/talosFactory.json5#10.0.1",
+    ":timezone(Europe/Zurich)",
+  ],
   schedule: ["every weekend"],
   mise: {
     managerFilePatterns: ["/^\\.mise/conf\\.d/[^/]+\\.toml$/"],
   },
   packageRules: [
+    // Auto-merge rules
+    {
+      description: "Auto-merge trusted OCI digests",
+      matchDatasources: ["docker"],
+      matchUpdateTypes: ["digest"],
+      matchPackageNames: ["/home-operations/"],
+      automerge: true,
+      automergeType: "pr",
+      ignoreTests: false,
+    },
+    {
+      description: "Auto-merge high-cadence OCI packages weekly",
+      matchDatasources: ["docker"],
+      matchUpdateTypes: ["minor", "patch"],
+      matchPackageNames: ["/kube-prometheus-stack/"],
+      automerge: true,
+      automergeType: "pr",
+      ignoreTests: false,
+      schedule: ["before 6am on Monday"],
+    },
+    {
+      description: "Auto-merge GitHub Actions",
+      matchManagers: ["github-actions"],
+      matchUpdateTypes: ["minor", "patch", "digest"],
+      automerge: true,
+      automergeType: "pr",
+      minimumReleaseAge: "3 days",
+      ignoreTests: false,
+    },
+    {
+      description: "Auto-merge trusted GitHub Actions",
+      matchManagers: ["github-actions"],
+      matchPackageNames: ["/^actions\\//"],
+      matchUpdateTypes: ["minor", "patch", "digest"],
+      automerge: true,
+      automergeType: "pr",
+      minimumReleaseAge: "1 minute",
+      ignoreTests: false,
+    },
+    {
+      description: "Auto-merge Grafana dashboards",
+      matchDatasources: ["custom.grafana-dashboards"],
+      matchUpdateTypes: ["major"],
+      automerge: true,
+      automergeType: "pr",
+      ignoreTests: false,
+    },
+    {
+      description: "Auto-merge Renovate Presents",
+      matchManagers: ["renovate-config"],
+      matchUpdateTypes: ["minor", "patch"],
+      automerge: true,
+      automergeType: "pr",
+      ignoreTests: false,
+    },
+    // Grouping rules
     {
       description: "GitHub Actions Group",
       matchManagers: ["github-actions"],
@@ -34,6 +95,16 @@
       groupName: "flux-operator",
       matchDatasources: ["docker"],
       matchPackageNames: ["/flux-operator/", "/flux-instance/"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+      minimumGroupSize: 2,
+    },
+    {
+      description: "Rook-Ceph Group",
+      groupName: "rook-ceph",
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/rook-ceph/", "/rook-ceph-cluster/"],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
       },
